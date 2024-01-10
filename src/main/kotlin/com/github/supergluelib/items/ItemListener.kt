@@ -13,6 +13,7 @@ internal class ItemListener: Listener {
     @EventHandler fun onInteract(event: PlayerInteractEvent) {
         val item = event.item ?: return
         val customItem = SuperItems.fromItemStack(item) ?: return
+        if (customItem.settings.cancelEventsAutomatically) event.isCancelled = true
         val player = event.player
         val block = event.clickedBlock
         when (event.action) {
@@ -42,6 +43,7 @@ internal class ItemListener: Listener {
         if (item == null || item.type.isAir) return
         val customItem = SuperItems.fromItemStack(item) ?: return
         val entity = event.rightClicked
+        if (customItem.settings.cancelEventsAutomatically) event.isCancelled = true
         customItem.onRightClick(player, item)
         customItem.onRightClickEntity(player, entity, item)
     }
@@ -52,6 +54,7 @@ internal class ItemListener: Listener {
         if (item.type.isAir) return
         val customItem = SuperItems.fromItemStack(item) ?: return
         val entity = event.entity
+        if (customItem.settings.cancelEventsAutomatically) event.isCancelled = true
         customItem.onLeftClick(player, item)
         customItem.onLeftClickEntity(player, entity, item)
     }
