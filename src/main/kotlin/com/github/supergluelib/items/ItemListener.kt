@@ -13,25 +13,24 @@ internal class ItemListener: Listener {
     @EventHandler fun onInteract(event: PlayerInteractEvent) {
         val item = event.item ?: return
         val customItem = SuperItems.fromItemStack(item) ?: return
-        if (customItem.settings.cancelEventsAutomatically) event.isCancelled = true
         val player = event.player
         val block = event.clickedBlock
         when (event.action) {
             Action.RIGHT_CLICK_BLOCK -> {
-                customItem.onRightClick(player, item)
-                customItem.onRightClickBlock(player, block!!, item)
+                customItem.onRightClick(player, item, event)
+                customItem.onRightClickBlock(player, block!!, item, event)
             }
             Action.RIGHT_CLICK_AIR -> {
-                customItem.onRightClick(player, item)
-                customItem.onRightClickAir(player, item)
+                customItem.onRightClick(player, item, event)
+                customItem.onRightClickAir(player, item, event)
             }
             Action.LEFT_CLICK_BLOCK -> {
-                customItem.onLeftClick(player, item)
-                customItem.onLeftClickBlock(player, block!!, item)
+                customItem.onLeftClick(player, item, event)
+                customItem.onLeftClickBlock(player, block!!, item, event)
             }
             Action.LEFT_CLICK_AIR -> {
-                customItem.onLeftClick(player, item)
-                customItem.onLeftClickAir(player, item)
+                customItem.onLeftClick(player, item, event)
+                customItem.onLeftClickAir(player, item, event)
             }
             else -> {}
         }
@@ -43,9 +42,8 @@ internal class ItemListener: Listener {
         if (item == null || item.type.isAir) return
         val customItem = SuperItems.fromItemStack(item) ?: return
         val entity = event.rightClicked
-        if (customItem.settings.cancelEventsAutomatically) event.isCancelled = true
-        customItem.onRightClick(player, item)
-        customItem.onRightClickEntity(player, entity, item)
+        customItem.onRightClick(player, item, event)
+        customItem.onRightClickEntity(player, entity, item, event)
     }
 
     @EventHandler fun onPunchEntity(event: EntityDamageByEntityEvent) {
@@ -54,9 +52,8 @@ internal class ItemListener: Listener {
         if (item.type.isAir) return
         val customItem = SuperItems.fromItemStack(item) ?: return
         val entity = event.entity
-        if (customItem.settings.cancelEventsAutomatically) event.isCancelled = true
-        customItem.onLeftClick(player, item)
-        customItem.onLeftClickEntity(player, entity, item)
+        customItem.onLeftClick(player, item, event)
+        customItem.onLeftClickEntity(player, entity, item, event)
     }
 
 }
