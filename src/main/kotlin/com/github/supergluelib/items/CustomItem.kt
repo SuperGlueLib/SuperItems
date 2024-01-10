@@ -16,6 +16,8 @@ import org.bukkit.inventory.ItemStack
  *
  * Note that methods that encapsulate multiple other methods are all called, for example;
  * when a player right-clicks a block, both onRightClick & onRightClickBlock are called, only one needs to be handled.
+ *
+ * - Each item must be registered via [SuperItems.register]
  */
 abstract class CustomItem() {
 
