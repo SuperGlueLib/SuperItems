@@ -3,7 +3,6 @@ package com.github.supergluelib.items
 import org.bukkit.block.Block
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
-import org.bukkit.event.Cancellable
 import org.bukkit.event.Event
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.player.PlayerInteractAtEntityEvent

@@ -1,9 +1,9 @@
 package com.github.supergluelib.items
 
 import org.bukkit.Bukkit
+import org.bukkit.event.Cancellable
 import org.bukkit.inventory.ItemStack
 import org.bukkit.plugin.java.JavaPlugin
-import kotlin.text.Typography.registered
 
 object SuperItems {
     private var plugin: JavaPlugin? = null
@@ -24,4 +24,5 @@ object SuperItems {
     internal fun fromItemStack(item: ItemStack) = items.values.find { it.isItem(item) }?.fromItemStack(item)
 
     fun ItemStack.locnameIs(name: String) = itemMeta?.localizedName?.equals(name) == true
+    fun Cancellable.cancel() { isCancelled = true }
 }
